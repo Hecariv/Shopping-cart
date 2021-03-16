@@ -30,7 +30,7 @@ class ShoppingCart extends Component {
                 console.log(totalQuantity);
             }
         }); 
-        isInCart ? this.setState({quantity: 100}) : this.setState(prevState => ({products: prevState.products.concat(item)}));
+        isInCart ? this.setState({quantity: totalQuantity}) : this.setState(prevState => ({products: prevState.products.concat(item)}));
     }
 
     calculateTotal = () => this.setState({totalPrice: 0})
