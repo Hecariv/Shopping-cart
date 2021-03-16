@@ -17,7 +17,14 @@ class UserForm extends Component {
                 return product
             }
         });
-        let itemToAdd = { id: ++itemId, product: { id: searchItem.id, name: searchItem.name, price: searchItem.price }, quantity: this.state.quantity }
+        let itemToAdd = { 
+                id: ++itemId, 
+                product: { 
+                    id: searchItem.id, 
+                    name: searchItem.name, 
+                    price: searchItem.price 
+                }, 
+                quantity: this.state.quantity }
         this.props.addItem(itemToAdd)
     }
 
@@ -36,8 +43,8 @@ class UserForm extends Component {
                     </p>
                     <p>
                         <label>Products</label><br />
-                        <select onChange={this.onChange} name="product">
-                            <option disabled defaultValue>Select an Option</option>
+                        <select  onChange={this.onChange} name="product">
+                            <option selected disabled hidden>Select an Option</option>
                             {products.map((product, key) =>  <option key={key}>{product.name}</option>)}
                         </select>
                     </p>

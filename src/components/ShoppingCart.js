@@ -4,11 +4,9 @@ import TotalPrice from "./TotalPrice"
 import UserForm from "./UserForm"
 
 class ShoppingCart extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-
-
             products: [
                 { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', price: 3.99 }, quantity: 1 },
                 { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', price: 4.99 }, quantity: 2 },
@@ -18,9 +16,10 @@ class ShoppingCart extends Component {
 
         }
 
-    }
+    };
 
     addItem = (item) => {
+        let productToChange = null
         let isInCart = false;
         let totalQuantity = 0
         this.state.products.map(product => {
@@ -28,9 +27,17 @@ class ShoppingCart extends Component {
                 isInCart = true
                 totalQuantity = Number(product.quantity) + Number(item.quantity)
                 console.log(totalQuantity);
+                productToChange = item;
             }
         }); 
-        isInCart ? this.setState({quantity: totalQuantity}) : this.setState(prevState => ({products: prevState.products.concat(item)}));
+        isInCart ? 
+            this.setState(prevState => 
+                ({
+                    products: prevState.products.map(product => 
+                        product.product.id === productToChange.product.id ? 
+                        {...product, quantity: totalQuantity} : 
+                        product)})) : 
+                this.setState(prevState => ({products: prevState.products.concat(item)}));
     }
 
     calculateTotal = () => this.setState({totalPrice: 0})
