@@ -8,6 +8,7 @@ class ShoppingCart extends Component {
         super();
         this.state = {
 
+            
             products: [
                 { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', price: 3.99 }, quantity: 1 },
                 { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', price: 4.99 }, quantity: 2 },
