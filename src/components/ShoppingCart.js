@@ -1,16 +1,18 @@
 import React, { Component } from "react";
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import ProductsInCart from "./ProductsInCart";
 import TotalPrice from "./TotalPrice"
 import UserForm from "./UserForm"
+import { products } from "./Products";
 
 class ShoppingCart extends Component {
     constructor(props) {
         super(props);
         this.state = {
             products: [
-                { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', price: 3.99 }, quantity: 1 },
-                { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', price: 4.99 }, quantity: 2 },
-                { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', price: 19.99 }, quantity: 1 },
+                { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', price: 3.99, isInCart: true }, quantity: 1 },
+                { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', price: 4.99, isInCart: true }, quantity: 2 },
+                { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', price: 19.99, isInCart: true }, quantity: 1 },
             ],
             totalPrice: 0,
 
@@ -18,27 +20,24 @@ class ShoppingCart extends Component {
 
     };
 
+    deleteItem = (item) => {
+        this.setState(prevState => ({products: prevState.products.filter(thing => thing !== item)}))
+    } 
+
     addItem = (item) => {
-        let productToChange = null
-        let isInCart = false;
-        let totalQuantity = 0
-        this.state.products.map(product => {
-            if (product.product.name === item.product.name) {
-                isInCart = true
-                totalQuantity = Number(product.quantity) + Number(item.quantity)
-                console.log(totalQuantity);
-                productToChange = item;
-            }
-        }); 
-        isInCart ? 
-            this.setState(prevState => 
-                ({
-                    products: prevState.products.map(product => 
-                        product.product.id === productToChange.product.id ? 
-                        {...product, quantity: totalQuantity} : 
-                        product)})) : 
-                this.setState(prevState => ({products: prevState.products.concat(item)}));
+        let found = this.state.products.find(thing => thing.product.name === item.product.name)
+        if (found) {
+            let totalQuantity = Number(found.quantity) + Number(item.quantity)
+            this.setState(prevState => ({
+                products: prevState.products.map(product => 
+                    product.product.id === item.product.id ? 
+                    {...product, quantity: totalQuantity} : 
+                    product)}))
+        } else {
+            this.setState(prevState => ({products: prevState.products.concat(item)}));
+        }
     }
+
 
     calculateTotal = () => this.setState({totalPrice: 0})
 
@@ -52,17 +51,21 @@ class ShoppingCart extends Component {
                     <div className="list-group">
                         <div className="list-group-item">
                             <div className="row">
-                                <div className="col-md-8">Product</div>
+                                <div className="col-md-6">Product</div>
                                 <div className="col-md-2">Price</div>
                                 <div className="col-md-2">Quantity</div>
+                                <div className="col-md-2">Remove</div>
                             </div>
                         </div>
                         {this.state.products.map(item =>
                             <ProductsInCart
+                                deleteItem={this.deleteItem}
+                                products={this.state.products}
                                 key={item.id}
                                 name={item.product.name}
                                 price={item.product.price}
                                 quantity={item.quantity}
+                                faTrash={faTrash}
                             />
                         )}
                     </div>

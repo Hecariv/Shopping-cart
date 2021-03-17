@@ -1,0 +1,8 @@
+.btn-delete {
+    margin: 0 18px;
+    width: 50px;
+    background-color: transparent;
+    border: transparent;
+    outline: none;
+    cursor: pointer;
+}

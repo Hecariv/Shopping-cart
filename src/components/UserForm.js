@@ -12,20 +12,21 @@ class UserForm extends Component {
 
     addItem = (e) => {
         e.preventDefault()
-        let searchItem = products.find(product => {
-            if (product.name === this.state.product) {
-                return product
-            }
-        });
-        let itemToAdd = { 
+        let searchItem = products.find(product => product.name === this.state.product )
+        if (searchItem) {
+            let itemToAdd = { 
                 id: ++itemId, 
                 product: { 
                     id: searchItem.id, 
                     name: searchItem.name, 
-                    price: searchItem.price 
+                    price: searchItem.price,
+                    isInCart: true, 
                 }, 
                 quantity: this.state.quantity }
         this.props.addItem(itemToAdd)
+        } else {
+            console.log("not found");
+        }
     }
 
 
@@ -39,12 +40,12 @@ class UserForm extends Component {
                 <div className="form-group container">
                     <p>
                         <label>Qantity</label><br />
-                        <input type="text" onChange={this.onChange} name="quantity" />
+                        <input type="number" min="1" defaultValue="1" onChange={this.onChange} name="quantity" />
                     </p>
                     <p>
                         <label>Products</label><br />
-                        <select  onChange={this.onChange} name="product">
-                            <option selected disabled hidden>Select an Option</option>
+                        <select defaultValue={"DEFAULT"} onChange={this.onChange} name="product">
+                            <option value="DEFAULT" disabled>Select an Option</option>
                             {products.map((product, key) =>  <option key={key}>{product.name}</option>)}
                         </select>
                     </p>
