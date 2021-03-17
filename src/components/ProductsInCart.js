@@ -20,7 +20,10 @@ class ProductsInCart extends Component {
                     <div className="col-md-6">{this.props.name}</div>
                     <div className="col-md-2">${this.props.price}</div>
                     <div className="col-md-2">{this.props.quantity}</div>
-                    <button onClick={() => this.deleteItem(this.props.name)} className="btn-delete"><FontAwesomeIcon icon={this.props.faTrash} /></button>
+                    {this.props.products.length >= 2 ? 
+                        <button onClick={() => 
+                            this.deleteItem(this.props.name)} className="btn-delete"><FontAwesomeIcon icon={this.props.faTrash} /></button> : 
+                        <p></p>}
                 </div>
             </div>
         )

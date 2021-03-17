@@ -20,7 +20,6 @@ class UserForm extends Component {
                     id: searchItem.id, 
                     name: searchItem.name, 
                     price: searchItem.price,
-                    isInCart: true, 
                 }, 
                 quantity: this.state.quantity }
         this.props.addItem(itemToAdd)
@@ -40,7 +39,7 @@ class UserForm extends Component {
                 <div className="form-group container">
                     <p>
                         <label>Qantity</label><br />
-                        <input type="number" min="1" defaultValue="1" onChange={this.onChange} name="quantity" />
+                        <input type="number" min={1} onChange={this.onChange} name="quantity" />
                     </p>
                     <p>
                         <label>Products</label><br />
