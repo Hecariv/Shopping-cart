@@ -10,7 +10,7 @@ function App() {
    <div className="App">
     <Header />
     <ShoppingCart />
-    <Footer copyright="&copy;" year="2016" />
+    <Footer copyright="&copy;" year="2021" />
    </div>
   );
 }

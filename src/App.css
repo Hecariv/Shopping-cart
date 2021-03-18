@@ -1,10 +1,14 @@
 .btn-delete {
     margin: 0 18px;
     width: 50px;
-    background-color: transparent;
+    background-color: lightgrey;
     border: transparent;
     outline: none;
     cursor: pointer;
+}
+
+.btn-delete:disabled {
+    background-color: transparent;
 }
 
 .footer {

@@ -11,7 +11,7 @@ class ProductsInCart extends Component {
     deleteItem = (itemName) => {
         let foundItem = this.props.products.find(thing => thing.product.name === itemName)
         this.props.deleteItem(foundItem)
-    } 
+    }
 
     render() {
         return (
@@ -20,10 +20,11 @@ class ProductsInCart extends Component {
                     <div className="col-md-6">{this.props.name}</div>
                     <div className="col-md-2">${this.props.price}</div>
                     <div className="col-md-2">{this.props.quantity}</div>
-                    {this.props.products.length >= 2 ? 
-                        <button onClick={() => 
-                            this.deleteItem(this.props.name)} className="btn-delete"><FontAwesomeIcon icon={this.props.faTrash} /></button> : 
-                        <p></p>}
+
+                    <button disabled={this.props.products.length >= 2 ? false : true} onClick={() =>
+                        this.deleteItem(this.props.name)} className="btn-delete">
+                            <FontAwesomeIcon icon={this.props.faTrash} />
+                    </button>
                 </div>
             </div>
         )
