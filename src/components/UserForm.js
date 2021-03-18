@@ -12,21 +12,26 @@ class UserForm extends Component {
     }
 
     addItem = (e) => {
-        e.preventDefault()
-        let searchItem = products.find(product => product.name === this.state.product )
-        if (searchItem) {
-            let itemToAdd = { 
-                id: ++itemId, 
-                product: { 
-                    id: searchItem.id, 
-                    name: searchItem.name, 
-                    price: searchItem.price,
-                }, 
-                quantity: this.state.quantity }
-        this.props.addItem(itemToAdd)
+        if (this.state.quantity <= 0) {
+            alert("give a postivie quantity")
         } else {
-            console.log("not found");
+            e.preventDefault()
+            let searchItem = products.find(product => product.name === this.state.product )
+            if (searchItem) {
+                let itemToAdd = { 
+                    id: ++itemId, 
+                    product: { 
+                        id: searchItem.id, 
+                        name: searchItem.name, 
+                        price: searchItem.price,
+                    }, 
+                    quantity: this.state.quantity }
+            this.props.addItem(itemToAdd)
+            } else {
+                alert("Select a Product")
+            }
         }
+        
     }
 
 

@@ -3,8 +3,6 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import ProductsInCart from "./ProductsInCart";
 import TotalPrice from "./TotalPrice"
 import UserForm from "./UserForm"
-//import TotalPrice from "./TotalPrice"
-
 
 class ShoppingCart extends Component {
     constructor(props) {
@@ -40,13 +38,7 @@ class ShoppingCart extends Component {
         }
     }
 
-
     calculateTotal = () => this.setState({totalPrice: 0})
-
-    //  calculateTotal = (price) => this.setState({totalPrice: price})
-
-
-
   
     render() {
         return (
@@ -75,7 +67,7 @@ class ShoppingCart extends Component {
                         )}
                     </div>
                 </div>
-                <TotalPrice calculateTotal={this.state.products} /*calculateTotalPrice={this.calculateTotal}  productsList={this.state.products}*//>
+                <TotalPrice calculateTotal={this.state.products} />
                 <UserForm addItem={this.addItem} />
             </div>
         )
